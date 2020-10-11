@@ -1,39 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/header/header.component";
 import Post from "./components/post/post.component";
+import { db } from "./firebase/firebase.utils";
 
 function App() {
-  const [posts, setPosts] = useState([
-    {
-      username: "coderchaitu",
-      caption: "react instagram clone",
-      imageUrl:
-        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-    },
-    {
-      username: "coderchaitu",
-      caption: "react instagram clone",
-      imageUrl:
-        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-    },
-    {
-      username: "coderchaitu",
-      caption: "react instagram clone",
-      imageUrl:
-        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-    },
-  ]);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    db.collection("posts").onSnapshot((snapshot) => {
+      setPosts(snapshot.docs.map((doc) => ({ id: doc.id, post: doc.data() })));
+    });
+  }, []);
+
   return (
     <div className="App">
       <Header />
-      {posts.map((post) => (
-        <Post
-          username={post.username}
-          imageUrl={post.imageUrl}
-          caption={post.caption}
-        />
-      ))}
+      <div>
+        {posts.map(({ id, post }) => (
+          <Post
+            key={id}
+            username={post.username}
+            imageUrl={post.imageUrl}
+            caption={post.caption}
+          />
+        ))}
+      </div>
     </div>
   );
 }
