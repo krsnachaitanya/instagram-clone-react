@@ -1,0 +1,16 @@
+.header__container {
+  background-color: #fff;
+  border-bottom: 1px solid lightgrey;
+  .app__header {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .app__headerImage {
+      margin-top: 8px;
+      object-fit: contain;
+    }
+  }
+}
