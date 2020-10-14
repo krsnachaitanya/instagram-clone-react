@@ -116,7 +116,7 @@ function Header() {
         <SearchInput />
         {user ? (
           <Button
-            color="primary"
+            color="secondary"
             variant="contained"
             onClick={() => auth.signOut()}
           >
@@ -125,8 +125,6 @@ function Header() {
         ) : (
           <div className="loginContainer">
             <Button
-              color="primary"
-              variant="contained"
               onClick={() => {
                 handleOpen();
                 setOpenSignIn(true);
@@ -135,8 +133,6 @@ function Header() {
               Sign In
             </Button>
             <Button
-              color="primary"
-              variant="contained"
               onClick={() => {
                 handleOpen();
                 setOpenSignUp(true);
