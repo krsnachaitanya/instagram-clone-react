@@ -3,7 +3,7 @@ import "./upload-post.styles.scss";
 import {
   Button,
   FormControl,
-  Input,
+  // Input,
   makeStyles,
   Modal,
 } from "@material-ui/core";
