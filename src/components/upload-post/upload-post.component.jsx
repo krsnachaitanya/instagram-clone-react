@@ -1,16 +1,38 @@
 import React, { useState } from "react";
 import "./upload-post.styles.scss";
 import {
+  Box,
   Button,
   FormControl,
-  Input,
   makeStyles,
   Modal,
+  TextField,
+  Typography,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import firebase from "firebase";
 import { storage, db } from "../../firebase/firebase.utils";
+
+function LinearProgressWithLabel(props) {
+  return (
+    <Box display="flex" alignItems="center" marginTop="10px">
+      <Box minWidth={115}>
+        <Typography variant="body2">Upload Progress:</Typography>
+      </Box>
+      <Box minWidth={28}>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+        >{`${props.value}%`}</Typography>
+      </Box>
+      <Box width="100%">
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+    </Box>
+  );
+}
 
 function getModalStyle() {
   const top = 50;
@@ -30,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     outline: 0,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 4),
+    padding: theme.spacing(4, 4, 4),
     borderRadius: 5,
   },
   modalLogo: {
@@ -38,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
   },
   modalbuttons: {
-    marginTop: 30,
+    marginTop: 15,
     display: "flex",
     justifyContent: "center",
     gap: "20px",
@@ -46,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
   inputFields: {
     width: 300,
     display: "flex",
+    gap: "20px",
     margin: "0 auto",
   },
 }));
@@ -119,13 +142,18 @@ function UploadPost({ username }) {
         <div style={modalStyle} className={classes.paper}>
           <form>
             <FormControl className={classes.inputFields}>
-              <Input type="file" onChange={handleChange} />
-              <progress value={progress} max="100" />
-              <Input
-                type="text"
-                placeholder="Enter a caption..."
+              <TextField
+                type="file"
+                variant="outlined"
+                accept="image/*"
+                onChange={handleChange}
+              />
+              <TextField
+                label="Enter a caption"
+                variant="outlined"
                 onChange={(e) => setCaption(e.target.value)}
               />
+              <LinearProgressWithLabel value={progress} />
             </FormControl>
             <div className={classes.modalbuttons}>
               <Button
