@@ -6,6 +6,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { auth } from "../../firebase/firebase.utils";
+import UploadPost from "../upload-post/upload-post.component";
 
 function getModalStyle() {
   const top = 50;
@@ -115,15 +116,18 @@ function Header() {
         />
         <SearchInput />
         {user ? (
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={() => auth.signOut()}
-          >
-            Logout
-          </Button>
+          <div>
+            <UploadPost />
+            <Button
+              color="secondary"
+              variant="outlined"
+              onClick={() => auth.signOut()}
+            >
+              Logout
+            </Button>
+          </div>
         ) : (
-          <div className="loginContainer">
+          <div>
             <Button
               onClick={() => {
                 handleOpen();
