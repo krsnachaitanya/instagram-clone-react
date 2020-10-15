@@ -18,17 +18,17 @@ import { storage, db } from "../../firebase/firebase.utils";
 function LinearProgressWithLabel(props) {
   return (
     <Box display="flex" alignItems="center" marginTop="10px">
-      <Box minWidth={115}>
-        <Typography variant="body2">Upload Progress:</Typography>
+      <Box minWidth={70}>
+        <Typography variant="body2">Progress:</Typography>
       </Box>
-      <Box minWidth={28}>
+      <Box width="100%" mr="10px">
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box minWidth={35}>
         <Typography
           variant="body2"
           color="textSecondary"
         >{`${props.value}%`}</Typography>
-      </Box>
-      <Box width="100%">
-        <LinearProgress variant="determinate" {...props} />
       </Box>
     </Box>
   );
@@ -166,6 +166,7 @@ function UploadPost({ username }) {
               </Button>
 
               <Button
+                disabled={!caption || !image}
                 type="submit"
                 variant="contained"
                 color="primary"
