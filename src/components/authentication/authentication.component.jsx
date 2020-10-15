@@ -107,9 +107,9 @@ function Authentication() {
 
   return (
     <>
-      {user ? (
+      {user?.displayName ? (
         <div>
-          <UploadPost />
+          <UploadPost username={user.displayName} />
           <Button
             color="secondary"
             variant="outlined"
