@@ -21,10 +21,38 @@
     border-top: 1px solid #dbdbdb;
     border-bottom: 1px solid #dbdbdb;
   }
-  .post__text {
-    strong {
-      margin-right: 4px;
+  .post__footer {
+    .post__text {
+      padding: 10px 16px 10px 16px;
+      strong {
+        margin-right: 6px;
+      }
     }
-    padding: 16px;
+    .post__comments {
+      padding: 0 16px 10px 16px;
+      .post__comments--item {
+        padding: 3px 0;
+        .comment__time {
+          font-size: 12px;
+          color: gray;
+          padding-left: 6px;
+        }
+      }
+    }
+    .post__comment {
+      border-top: 1px solid #efefef;
+      padding: 6px 16px;
+      display: flex;
+      .post__input {
+        outline: none;
+        flex: 1;
+        border: none;
+        font-size: 14px;
+      }
+      .post__button {
+        font-weight: bold;
+        flex: 0;
+      }
+    }
   }
 }
